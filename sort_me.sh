@@ -1,0 +1,1 @@
+cat Sort\ Me.txt | ./sort_me.py
