@@ -35,17 +35,17 @@ def map_strs_to_len(strs: list[str]) -> dict[int, list[str]]:
     return strs_by_length
 
 
-def sort_dict_lists(d: dict[int, list[str]]) -> dict[int, list[str]]:
-    sorted_lengths: list[int] = sorted(d.keys())
+def sort_dict_lists(d: dict[int, list[str]], reverse=False) -> dict[int, list[str]]:
+    sorted_lengths: list[int] = sorted(d.keys(), reverse=reverse)
     # sort each group of like-lengthed strings
     for length in sorted_lengths:
-        d[length] = sorted(d[length])
+        d[length] = sorted(d[length], reverse=reverse)
 
     return d
 
 
-def print_dict_lists(d: dict[int, list[str]]) -> None:
-    sorted_lengths: list[int] = sorted(d.keys())
+def print_dict_lists(d: dict[int, list[str]], reverse=False) -> None:
+    sorted_lengths: list[int] = sorted(d.keys(), reverse=reverse)
     for length in sorted_lengths:
         # and print them out
         for s in strs_by_length[length]:
@@ -53,7 +53,17 @@ def print_dict_lists(d: dict[int, list[str]]) -> None:
 
 
 if __name__ == "__main__":
+    # https://docs.python.org/3/howto/argparse.html
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-r",
+        "--reverse",
+        help="reverse the order in which the items are sorted",
+        action="store_true"
+    )
+    args = parser.parse_args()
+
     lines: list[str] = read_input()
     strs_by_length: dict[int, list[str]] = map_strs_to_len(lines)
-    strs_by_length = sort_dict_lists(strs_by_length)
-    print_dict_lists(strs_by_length)
+    strs_by_length = sort_dict_lists(strs_by_length, args.reverse)
+    print_dict_lists(strs_by_length, args.reverse)
