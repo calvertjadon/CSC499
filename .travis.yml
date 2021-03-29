@@ -6,4 +6,4 @@ install:
   - pipenv install
 # command to run tests
 script:
-  - test_sort.sh
+  - ./test_sort.sh
