@@ -3,6 +3,7 @@ if [ "$DIFF" = "" ]; then
 	echo "Sort passed"
 else
 	echo "Sort failed"
+	exit 1
 fi
 
 
@@ -11,6 +12,7 @@ if [ "$DIFF" = "" ]; then
 	echo "Reverse sort passed"
 else
 	echo "Reverse sort failed"
+	exit 1
 fi
 
 
